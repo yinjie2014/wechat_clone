@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         home: HomeScreen(),
         theme: ThemeData.light().copyWith(
           primaryColor: Color(AppColors.AppBarColor),
+          cardColor: Color(AppColors.AppBarColor)
         ));
   }
 }
