@@ -15,8 +15,7 @@ class NavigationIconView {
     IconData icon,
     IconData activeIcon,
     BottomNavigationBarItem item,
-  })  : 
-        item = new BottomNavigationBarItem(
+  }) : item = new BottomNavigationBarItem(
             icon: Icon(icon),
             activeIcon: Icon(activeIcon),
             title: Text(title),
@@ -30,7 +29,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   // 底部BottomItem数组
   List<NavigationIconView> _navigationViews;
   // 当前选中的BottomItem索引
@@ -94,13 +92,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // 分页初始化
     _pageController = PageController(initialPage: _currentIndex);
-    
+
     // 初始化分页Widget
     _pages = [
       ConversationPage(),
-      Container(color: Colors.grey,),
-      Container(color: Colors.red,),
-      Container(color: Colors.blue,)
+      Container(
+        color: Colors.grey,
+      ),
+      Container(
+        color: Colors.red,
+      ),
+      Container(
+        color: Colors.blue,
+      )
     ];
   }
 
@@ -128,7 +132,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final BottomNavigationBar bottomNavigationBar = BottomNavigationBar(
       fixedColor: const Color(AppColors.TabIconActive),
       items: _navigationViews.map((NavigationIconView view) {
@@ -144,7 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
           _currentIndex = index;
 
           // 设置pageController对应的index
-          _pageController.animateToPage(_currentIndex, duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+          _pageController.animateToPage(_currentIndex,
+              duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
         });
       },
     );
@@ -156,22 +160,16 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
         actions: <Widget>[
           Container(
-            padding: EdgeInsets.only(right: 16.0),
+            padding: EdgeInsets.only(right: 8.0),
             child: IconButton(
-              icon: Icon(
-                IconData(
-                  0xe65e,
-                  fontFamily: Constants.IconFontFamily,
-                ),
-                size: 22.0,
-              ),
+              icon: Icon(Icons.search),
               onPressed: () {
                 print("点击了搜搜");
               },
             ),
           ),
           Container(
-              padding: EdgeInsets.only(right: 16.0),
+              padding: EdgeInsets.only(right: 8.0),
               child: PopupMenuButton(
                 icon: Icon(Icons.add),
                 itemBuilder: (BuildContext context) {
@@ -216,13 +214,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
         ],
       ),
-      body:PageView.builder(
+      body: PageView.builder(
         itemBuilder: (BuildContext contex, int index) {
           return _pages[index];
         },
         controller: _pageController,
         itemCount: 4,
-        onPageChanged: (int index){
+        onPageChanged: (int index) {
           print('当前选择时第$index页');
           setState(() {
             // 设置选中的索引

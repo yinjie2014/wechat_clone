@@ -80,11 +80,17 @@ class _ConversationItem extends StatelessWidget {
 
     // 如果开启勿扰模式则添加勿扰图标
     if (conversation.isMute) {
-      _rightArea.add(Container(height: 10.0,));
+      _rightArea.add(Container(
+        height: 10.0,
+      ));
       _rightArea.add(muteIcon);
     } else {
-      _rightArea.add(Container(height: 10.0,));
-      _rightArea.add(SizedBox(height: Constants.ConversationMuteIconSize,));
+      _rightArea.add(Container(
+        height: 10.0,
+      ));
+      _rightArea.add(SizedBox(
+        height: Constants.ConversationMuteIconSize,
+      ));
     }
 
     return Container(
@@ -129,6 +135,53 @@ class _ConversationItem extends StatelessWidget {
   }
 }
 
+// 多端登录提示信息Widget
+class _DeiveInfoItem extends StatelessWidget {
+  const _DeiveInfoItem({Key key, this.device: Device.WIN})
+      : assert(device != null),
+        super(key: key);
+  
+  // 设备枚举
+  final Device device;
+
+  // 图标名称
+  Icon get iconName {
+    return device == Device.WIN ? Icon(Icons.widgets) : Icon(Icons.desktop_mac);
+  }
+
+  // 设备名称
+  String get deviceName {
+
+    Map aa = {'aaa': 'aaaaaafadasdasa'};
+    print(aa['aaa']);
+
+    return device == Device.WIN ? 'Windows': 'MAC';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Color(AppColors.DeviceInfoItemBg),
+          border: Border(
+              bottom: BorderSide(
+                  width: 1.0, color: Color(AppColors.DividerColor)))),
+      padding: EdgeInsets.fromLTRB(24.0, 10.0, 24.0, 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          iconName,
+          SizedBox(
+            width: 10.0,
+          ),
+          Text('$deviceName 微信已登录，手机通知已关闭'),
+        ],
+      ),
+    );
+  }
+}
+
 class ConversationPage extends StatefulWidget {
   @override
   _ConversationPageState createState() => _ConversationPageState();
@@ -140,6 +193,9 @@ class _ConversationPageState extends State<ConversationPage> {
     return Container(
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
+          if (index == 0) {
+            return _DeiveInfoItem();
+          }
           return _ConversationItem(
             conversation: mockConversation[index],
           );

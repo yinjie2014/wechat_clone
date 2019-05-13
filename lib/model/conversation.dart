@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart' show AppColors;
 
+// 登录设备类型枚举
+enum Device {
+  MAC,
+  WIN,
+}
+
 class Conversation {
   final String avatar; // 头像地址
   final String title; // 标题
