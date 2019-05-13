@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+
 import 'package:wechat_clone/constants.dart';
+import './conversation_page.dart';
 
 enum ActionItems { GROP_CHAT, ADD_FRIEND, QR_SCAN, PAYMENT, HELP }
 
@@ -95,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
     
     // 初始化分页Widget
     _pages = [
-      Container(color: Colors.white,),
+      ConversationPage(),
       Container(color: Colors.grey,),
       Container(color: Colors.red,),
       Container(color: Colors.blue,)
